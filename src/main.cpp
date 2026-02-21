@@ -11,7 +11,6 @@ int main()
 
 	Board board = Board(yMax, xMax);
 
-
 	endwin();
 
 	return 0;
