@@ -1,10 +1,9 @@
-#pragma once
 #ifndef MAIN_HPP
 # define MAIN_HPP
 
 # include <ncurses.h>
 # include <chrono>
-// # include "Board.hpp"
+# include "Board.hpp"
 
 # define BOARD_DIM 20
 # define BOARD_ROWS BOARD_DIM
