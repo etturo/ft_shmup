@@ -2,6 +2,7 @@
 #define UPDATABLE_HPP
 
 #include "GameState.hpp"
+# include "settings.hpp"
 
 class Updatable
 {

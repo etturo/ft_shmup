@@ -23,21 +23,22 @@ int main(void)
 	// int yMax, xMax;
 	// getmaxyx(stdscr, yMax, xMax);
 
-	// Board win = Board(yMax, xMax);
+	// Board board = Board(yMax, xMax);
 	t_gamestate	state = init_state();
 
 	Player player = Player();
 	state.entities.push_front(&player);
 	while (true)
 	{
-		state.pressed = wgetch(stdscr);
-		werase(stdscr);
+		state.pressed = wgetch(/* board.win */stdscr);
+		werase(/* board.win */stdscr);
+		// box(/* board.win */, 0, 0);
 		for (Entity *entity : state.entities)
 		{
 			entity->update(state);
-			entity->render(stdscr);
+			entity->render(/* board.win */stdscr);
 		}
-		wrefresh(stdscr);
+		wrefresh(/* board.win */stdscr);
 	}
 	
 	endwin();

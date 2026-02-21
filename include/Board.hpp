@@ -3,10 +3,7 @@
 
 # include <ncurses.h>
 # include <chrono>
-
-# define BOARD_DIM 20
-# define BOARD_ROWS BOARD_DIM
-# define BOARD_COLS BOARD_DIM * 2
+# include "settings.hpp"
 
 class Board
 {
