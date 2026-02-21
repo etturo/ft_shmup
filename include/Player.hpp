@@ -13,7 +13,7 @@ private:
 	int hp;
 
 public:
-	void update(t_gamestate state) override;
+	void update(t_gamestate &state) override;
 	void render(WINDOW *win) override;
 
 	inline int get_hp(){return this->hp;};

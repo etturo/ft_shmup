@@ -1,12 +1,17 @@
 #include "Bullet.hpp"
 #include <string.h>
 
-void Bullet::update(t_gamestate state)
+void Bullet::update(t_gamestate &state)
 {
-	pos.y++;
-	if (pos.y <= 0){
-		state.entities.remove(this);
-		delete(this);
+	this->delta_time += state.delta_time;
+
+	if (this->delta_time >= 50){
+		this->pos.y--;
+		this->delta_time = 0;
+	}
+
+	if (this->pos.y <= 0){
+		this->is_dead = true;
 	}
 }
 
@@ -17,8 +22,11 @@ void Bullet::render(WINDOW *win)
 
 Bullet::Bullet(Vector2 player_pos)
 {
-	pos.x = player_pos.x - (int)strlen(SPACESHIP) / 2 + ((int)strlen(SPACESHIP) % 2 == 0 ? -2 : -3);
-	pos.y = player_pos.y + 1;
+	pos.x = player_pos.x + ((int)strlen(SPACESHIP) / 2);
+	pos.y = player_pos.y - 1;
+
+	this->delta_time = 0;
+	this->is_dead = false;
 }
 
 Bullet::~Bullet()

@@ -9,7 +9,7 @@ private:
 	int hp;
 
 public:
-	void update(t_gamestate state) override;
+	void update(t_gamestate &state) override;
 	void render(WINDOW *win) override;
 
 	inline int get_hp(){return this->hp;};
@@ -18,7 +18,6 @@ public:
 	inline void set_pos(Vector2 new_pos){this->pos = new_pos;};
 	
 	inline int is_alive(){return this->hp > 0;};
-
 
 	Enemy();
 	~Enemy();

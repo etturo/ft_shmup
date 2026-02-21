@@ -9,7 +9,7 @@ Enemy::Enemy() {
 Enemy::~Enemy() {
 }
 
-void Enemy::update(t_gamestate state) {
+void Enemy::update(t_gamestate &state) {
 	(void)state;
 	this->pos.x -= 1;
 	if (this->pos.x < 0)

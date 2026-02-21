@@ -11,6 +11,7 @@ typedef struct s_gamestate {
 	int					score;
 	int					lives;
 	int					pressed;
+	long long			delta_time;
 	std::list<Entity*>	entities;
 }				t_gamestate;
 

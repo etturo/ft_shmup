@@ -7,7 +7,7 @@ class Bullet : public Entity
 {
 private:
 public:
-	void update(t_gamestate state) override;
+	void update(t_gamestate &state) override;
 	void render(WINDOW *win) override;
 
 	Bullet(Vector2 player_pos);

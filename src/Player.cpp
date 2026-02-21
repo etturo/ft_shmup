@@ -9,7 +9,7 @@ Player::~Player() {
 	
 }
 
-void Player::update(t_gamestate state)
+void Player::update(t_gamestate &state)
 {
 	int new_x = pos.x, new_y = pos.y;
 
@@ -20,8 +20,8 @@ void Player::update(t_gamestate state)
 		case 261: new_x += 1 ; break;
 		case 260: new_x -= 1 ; break;
 	}
-
-	if (state.pressed == ' '){
+	
+	if (state.pressed == 32){
 		Bullet *bullet = new Bullet(this->pos);
 		state.entities.push_back(bullet);
 	}

@@ -24,7 +24,10 @@ class Entity : public Updatable
 {
 protected:
 	Vector2 pos;
+	long long	delta_time;
 public:
+	bool	is_dead = false;
+
 	inline Vector2	get_pos(){return this->pos;};
 
 	virtual void render(WINDOW *win) = 0;

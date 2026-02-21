@@ -8,7 +8,7 @@ class Updatable
 {
 private:
 public:
-	void virtual update(t_gamestate state) = 0;
+	void virtual update(t_gamestate &state) = 0;
 
 	Updatable();
 	virtual ~Updatable();
