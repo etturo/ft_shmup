@@ -14,10 +14,8 @@ struct Vector2
 
 class Entity
 {
-private:
-	int	hp;
+protected:
 	Vector2 pos;
-
 public:
 	inline Vector2	get_pos(){return this->pos;};
 

@@ -29,4 +29,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+run: re
+	clear -x && ./bin/ft_shmup
+
+.PHONY: all clean fclean re run

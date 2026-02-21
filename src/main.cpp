@@ -1,8 +1,8 @@
 #include "../include/main.hpp"
 
-t_gamestate	init_state()
+t_gamestate	*init_state()
 {
-	t_gamestate	state;
+	t_gamestate	*state;
 	
 	state->level = 1;
 	state->lives = 3;
@@ -17,7 +17,7 @@ int main(void)
 	noecho();
 	refresh();
 	
-	t_gamestate	state = init_state();
+	t_gamestate	*state = init_state();
 	while (1)
 	{
 		// input (key inputs)

@@ -6,8 +6,6 @@
 class Player : public Entity
 {
 private:
-	Vector2 pos;
-	
 public:
 	Player(/* args */);
 	~Player();

@@ -3,20 +3,17 @@
 
 # include <ncurses.h>
 # include <chrono>
+# include <list>
+
 # include "Board.hpp"
+# include "Entity.hpp"
+# include "Enemy.hpp"
+# include "Player.hpp"
+# include "Updatable.hpp"
+# include "GameState.hpp"
 
 # define BOARD_DIM 20
 # define BOARD_ROWS BOARD_DIM
 # define BOARD_COLS BOARD_DIM * 2
-
-typedef struct s_gamestate {
-	unsigned int		level;
-	unsigned long long	time;
-	unsigned int		score;
-	unsigned int		lives;
-	Player				
-	list				enemies;
-
-}				t_gamestate;
 
 #endif

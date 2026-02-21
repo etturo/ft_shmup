@@ -7,8 +7,6 @@ class Enemy : public Entity
 {
 private:
 	int hp;
-	Vector2 pos;
-	long speed;
 
 public:
 	inline int get_hp(){return this->hp;};
