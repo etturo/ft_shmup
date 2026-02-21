@@ -2,8 +2,11 @@
 #define SETTINGS_HPP
 
 # define BOARD_DIM 40
-# define BOARD_ROWS BOARD_DIM * 2
+# define BOARD_ROWS BOARD_DIM
 # define BOARD_COLS BOARD_DIM
+
+# define SPACESHIP "=<O>="
+# define BULLET "!"
 
 
 #endif

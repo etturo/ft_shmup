@@ -3,7 +3,9 @@
 
 #include "Entity.hpp"
 #include "settings.hpp"
+#include "Bullet.hpp"
 #include <ncurses.h>
+#include "string.h"
 
 class Player : public Entity
 {

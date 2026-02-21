@@ -10,7 +10,7 @@ class Board
 private:
 public:
 	WINDOW *win;
-	Board(int yMax, int xMax);
+	Board();
 	~Board();
 };
 

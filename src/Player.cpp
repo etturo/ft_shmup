@@ -1,8 +1,8 @@
 #include "../include/Player.hpp"
 
 Player::Player() {
-	this->pos.x = 0;
-	this->pos.y = 0;
+	this->pos.x = BOARD_COLS / 2 - strlen(SPACESHIP) / 2 + (strlen(SPACESHIP) % 2 == 0 ? 0 : -1);
+	this->pos.y = BOARD_ROWS - 5;
 }
 
 Player::~Player() {
@@ -21,13 +21,18 @@ void Player::update(t_gamestate state)
 		case 260: new_x -= 1 ; break;
 	}
 
-	if (new_x > 0 && new_x < BOARD_ROWS - 1)
+	if (state.pressed == ' '){
+		Bullet *bullet = new Bullet(this->pos);
+		state.entities.push_back(bullet);
+	}
+
+	if (new_x > 0 && new_x < (BOARD_COLS - (int)strlen(SPACESHIP) / 2 + ((int)strlen(SPACESHIP) % 2 == 0 ? -2 : -3)))
 		this->pos.x = new_x;
-	if (new_y > 0 && new_y < BOARD_COLS - 1)
+	if (new_y > 0 && new_y < BOARD_ROWS - 1)
 		this->pos.y = new_y;
 }
 
 void Player::render(WINDOW *win)
 {
-	mvwprintw(win, this->pos.y, this->pos.x, "<>");
+	mvwprintw(win, this->pos.y, this->pos.x, SPACESHIP);
 }
