@@ -28,7 +28,7 @@ void Player::update(t_gamestate state)
 
 	if (new_x > 0 && new_x < (BOARD_COLS - (int)strlen(SPACESHIP) / 2 + ((int)strlen(SPACESHIP) % 2 == 0 ? -2 : -3)))
 		this->pos.x = new_x;
-	if (new_y > 0 && new_y < BOARD_ROWS - 1)
+	if (new_y > MAX_HEIGHT && new_y < BOARD_ROWS - 1)
 		this->pos.y = new_y;
 }
 

@@ -8,5 +8,6 @@
 # define SPACESHIP "=<O>="
 # define BULLET "!"
 
+# define MAX_HEIGHT (BOARD_DIM - (BOARD_DIM / 4)) 
 
 #endif
