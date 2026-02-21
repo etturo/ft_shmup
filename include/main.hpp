@@ -16,4 +16,7 @@
 # define BOARD_ROWS BOARD_DIM
 # define BOARD_COLS BOARD_DIM * 2
 
+t_gamestate	init_state();
+
+
 #endif

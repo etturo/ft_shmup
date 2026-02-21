@@ -3,14 +3,15 @@
 
 #include <list>
 
-#include "Entity.hpp"
+class Entity;
 
 typedef struct s_gamestate {
-	unsigned int		level;
-	unsigned long long	time;
-	unsigned int		score;
-	unsigned int		lives;
-	std::list<Entity>	entities;
+	int					level;
+	long long			time;
+	int					score;
+	int					lives;
+	int					pressed;
+	std::list<Entity*>	entities;
 }				t_gamestate;
 
 #endif

@@ -11,8 +11,8 @@
 class Board
 {
 private:
-	/* data */
 public:
+	WINDOW *win;
 	Board(int yMax, int xMax);
 	~Board();
 };
