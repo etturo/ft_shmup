@@ -11,6 +11,9 @@
 *.gch
 *.pch
 
+# Log files
+.valgrind
+
 # Linker files
 *.ilk
 

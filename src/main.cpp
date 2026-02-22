@@ -37,22 +37,42 @@ int main(void)
 	noecho();
 	refresh();
 	curs_set(0);
+	start_color();
+	use_default_colors();
+
+	init_pair(1, COLOR_WHITE, -1);
 
 	if (check_size() == false)
 		return 1;
 	Board *board = new Board();
+	WINDOW *hud = newwin(10, 15, (LINES / 2) - (BOARD_ROWS / 2), (COLS / 2) - (BOARD_COLS / 2) - 15);
+
+	Terrain background(BOARD_COLS, BOARD_ROWS);
 
 	keypad(board->win, TRUE);
 	nodelay(board->win, TRUE);
 	
 	t_gamestate	state = init_state();
-	state.entities.push_front(new Player());
+
+	Player *player = new Player();
+	state.entities.push_front(player);
 
 	state.time = get_current_time();
 	state.spawn_time = get_current_time();
 
 	while (true)
 	{
+		if (player->is_dead)
+		{
+			for (Entity *entity : state.entities)
+				delete(entity);
+			for (Entity *entity : state.spawn_list)
+				delete(entity);
+			printw("GAME OVER!\n");
+			break;
+		}
+
+
 		state.pressed = wgetch(board->win);
 
 		if (state.pressed == 'q')
@@ -63,20 +83,19 @@ int main(void)
 		state.spawn_time += state.delta_time;
 
 		werase(board->win);
+		werase(hud);
 
-		if (SECONDS(state.spawn_time) > SPAWN_RATE){
+		background.update(state);
+		background.render(board->win);
+
+		if (SECONDS(state.spawn_time) > SPAWN_RATE / ((state.score / 1000) + 1)){
 			state.spawn_list.push_front(new Enemy());
 			state.spawn_time = 0;
 		}
-		
-		// erase();
-		// wprintw(stdscr, "time: %lld\n", state.spawn_time);
-		// refresh();
 
 		state.entities.splice(state.entities.begin(), state.spawn_list);
 		state.spawn_list.clear();
 
-		// erase();
 		for (Entity *entity : state.entities)
 		{
 			entity->update(state);
@@ -84,11 +103,7 @@ int main(void)
 			if (!entity->is_dead)
 				entity->render(board->win);
 
-			// wprintw(stdscr, "%p\n", entity);
 		}
-		// refresh();
-
-		box(board->win, 0, 0);
 
 		for (auto it1 = state.entities.begin(); it1 != state.entities.end(); ++it1) 
 		{
@@ -102,7 +117,7 @@ int main(void)
 				if (a->pos.x < b->pos.x + b->sprite_len &&
 					a->pos.x + a->sprite_len > b->pos.x &&
 					a->pos.y < b->pos.y + b->sprite_height &&
-					a->pos.y + a->sprite_height > b->pos.y) 
+					a->pos.y + a->sprite_height > b->pos.y)
 				{
 					a->on_collision(b, state);
 					b->on_collision(a, state);
@@ -119,9 +134,18 @@ int main(void)
 			return false;
 		});
 
+		box(board->win, 0, 0);
+		
+		wprintw(hud, "\n LIVES: %d\n SCORE: %d\n LEVEL: %d\n", state.lives, state.score, state.score / 1000 + 1);
+
+		box(hud, 0, 0);
+
 		wrefresh(board->win);
+		wrefresh(hud);
 	}
-	
+
+	printw("PRESS RETURN TO EXIT...\n");
+	while (getch() != '\n') {}
 	endwin();
 	return (0);
 }

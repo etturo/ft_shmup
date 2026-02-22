@@ -12,6 +12,7 @@
 # include "Updatable.hpp"
 # include "GameState.hpp"
 # include "settings.hpp"
+# include "Terrain.hpp"
 
 t_gamestate	init_state();
 

@@ -1,6 +1,7 @@
 #include "../include/Player.hpp"
 
 Player::Player() {
+	this->hp = 3;
 	this->pos.x = BOARD_COLS / 2 - strlen(SPACESHIP) / 2 + (strlen(SPACESHIP) % 2 == 0 ? 0 : -1);
 	this->pos.y = BOARD_ROWS - 5;
 	this->sprite_len = strlen(SPACESHIP);
@@ -12,6 +13,11 @@ Player::~Player() {
 
 void Player::update(t_gamestate &state)
 {
+	if (this->hp <= 0){
+		this->is_dead = true;
+		return ;
+	}
+
 	int new_x = pos.x, new_y = pos.y;
 
 	switch (state.pressed)
@@ -32,8 +38,14 @@ void Player::update(t_gamestate &state)
 }
 
 void Player::on_collision(Entity* other, t_gamestate &state) {
-	if (other->type == TYPE_ENEMY || other->type == TYPE_ENEMY_BULLET) {
-		state.lives -= 1;
+	if (other->type == TYPE_ENEMY_BULLET){
+		this->hp--;
+		state.lives--;
+	}
+	else if (other->type == TYPE_ENEMY){
+		this->is_dead = true;
+		this->hp = 0;
+		state.lives = 0;
 	}
 }
 

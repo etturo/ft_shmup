@@ -11,6 +11,7 @@ class Enemy : public Entity
 private:
 	int hp;
 	long long fire_time;
+	const char *sprite;
 
 public:
 	void update(t_gamestate &state) override;
