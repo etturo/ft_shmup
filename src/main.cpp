@@ -49,6 +49,7 @@ int main(void)
 	state.entities.push_front(new Player());
 
 	state.time = get_current_time();
+	state.spawn_time = get_current_time();
 
 	while (true)
 	{
@@ -59,25 +60,55 @@ int main(void)
 
 		state.delta_time = get_current_time() - state.time;
 		state.time = get_current_time();
+		state.spawn_time += state.delta_time;
 
 		werase(board->win);
 
-		if (SECONDS(state.delta_time) > 1.0f)
+		if (SECONDS(state.spawn_time) > SPAWN_RATE){
 			state.spawn_list.push_front(new Enemy());
+			state.spawn_time = 0;
+		}
+		
+		// erase();
+		// wprintw(stdscr, "time: %lld\n", state.spawn_time);
+		// refresh();
 
 		state.entities.splice(state.entities.begin(), state.spawn_list);
 		state.spawn_list.clear();
 
+		// erase();
 		for (Entity *entity : state.entities)
 		{
 			entity->update(state);
 			
 			if (!entity->is_dead)
 				entity->render(board->win);
+
+			// wprintw(stdscr, "%p\n", entity);
 		}
+		// refresh();
 
 		box(board->win, 0, 0);
 
+		for (auto it1 = state.entities.begin(); it1 != state.entities.end(); ++it1) 
+		{
+			for (auto it2 = std::next(it1); it2 != state.entities.end(); ++it2) 
+				{
+  					Entity* a = *it1;
+					Entity* b = *it2;
+
+				if (a->is_dead || b->is_dead) continue;
+
+				if (a->pos.x < b->pos.x + b->sprite_len &&
+					a->pos.x + a->sprite_len > b->pos.x &&
+					a->pos.y < b->pos.y + b->sprite_height &&
+					a->pos.y + a->sprite_height > b->pos.y) 
+				{
+					a->on_collision(b, state);
+					b->on_collision(a, state);
+				}
+			}
+		}
 		state.entities.remove_if([](Entity *entity) 
 		{
 			if (entity->is_dead)

@@ -10,6 +10,8 @@ public:
 	void update(t_gamestate &state) override;
 	void render(WINDOW *win) override;
 
+	void on_collision(Entity *other, t_gamestate &state) override;
+
 	Bullet(Vector2 player_pos);
 	~Bullet();
 };

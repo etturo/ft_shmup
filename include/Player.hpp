@@ -22,6 +22,7 @@ public:
 	inline void set_pos(Vector2 new_pos){this->pos = new_pos;};
 	
 	inline int is_alive(){return this->hp > 0;};
+	void on_collision(Entity* other, t_gamestate &state) override;
 
 	Player();
 	~Player();

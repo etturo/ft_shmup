@@ -10,6 +10,8 @@
 # define BOARD_ROWS BOARD_DIM
 # define BOARD_COLS BOARD_DIM
 
+#define SPAWN_RATE 2
+
 # define SPACESHIP ("=<O>=")
 # define BULLET ("|")
 # define ENEMY ("<\\v/>")

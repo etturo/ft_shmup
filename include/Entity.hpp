@@ -20,17 +20,24 @@ struct Vector2
 	}
 };
 
+enum EntityType { TYPE_PLAYER, TYPE_ENEMY, TYPE_BULLET, TYPE_ENEMY_BULLET };
+
 class Entity : public Updatable
 {
 protected:
-	Vector2 pos;
 	long long	delta_time;
 public:
+	int sprite_height = 1;
+	int	sprite_len = 1;
+	Vector2 pos;
+	EntityType type;
 	bool	is_dead = false;
 
 	inline Vector2	get_pos(){return this->pos;};
 
 	virtual void render(WINDOW *win) = 0;
+
+	virtual void on_collision(Entity *other, t_gamestate &state);
 
 	Entity();
 	virtual ~Entity();

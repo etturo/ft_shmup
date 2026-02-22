@@ -27,6 +27,14 @@ Bullet::Bullet(Vector2 player_pos)
 
 	this->delta_time = 0;
 	this->is_dead = false;
+	this->sprite_len = strlen(BULLET);
+}
+
+void Bullet::on_collision(Entity *other, t_gamestate &state){
+	(void)state;
+	if (other->type == TYPE_ENEMY) {
+		this->is_dead = true;
+	}
 }
 
 Bullet::~Bullet()

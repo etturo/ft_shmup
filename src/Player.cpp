@@ -3,10 +3,10 @@
 Player::Player() {
 	this->pos.x = BOARD_COLS / 2 - strlen(SPACESHIP) / 2 + (strlen(SPACESHIP) % 2 == 0 ? 0 : -1);
 	this->pos.y = BOARD_ROWS - 5;
+	this->sprite_len = strlen(SPACESHIP);
 }
 
 Player::~Player() {
-	
 }
 
 void Player::update(t_gamestate &state)
@@ -29,6 +29,13 @@ void Player::update(t_gamestate &state)
 	if (new_y > MAX_HEIGHT && new_y < BOARD_ROWS - 1)
 		this->pos.y = new_y;
 }
+
+void Player::on_collision(Entity* other, t_gamestate &state) {
+	if (other->type == TYPE_ENEMY || other->type == TYPE_ENEMY_BULLET) {
+		state.lives -= 1;
+	}
+}
+
 
 void Player::render(WINDOW *win)
 {
