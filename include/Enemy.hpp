@@ -1,6 +1,7 @@
 #ifndef ENEMY_HPP
 # define ENEMY_HPP
 
+# include "Bullet.hpp"
 # include "Entity.hpp"
 
 int random_between(int min, int max);
@@ -9,6 +10,7 @@ class Enemy : public Entity
 {
 private:
 	int hp;
+	long long fire_time;
 
 public:
 	void update(t_gamestate &state) override;

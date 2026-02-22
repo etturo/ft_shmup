@@ -15,6 +15,7 @@
 # define SPACESHIP ("=<O>=")
 # define BULLET ("|")
 # define ENEMY ("<\\v/>")
+# define ENEMY_BULLET ("o")
 
 # define MAX_HEIGHT (BOARD_DIM - (BOARD_DIM / 4)) 
 # define SECONDS(clock) (clock / 1000000000.0f)
