@@ -33,6 +33,6 @@ run: re
 	clear && ./bin/ft_shmup
 
 valgrind: re
-	clear && valgrind --leak-check=full --show-leak-kinds=all --log-file=.valgrind --suppressions=supp_extra.supp ./bin/ft_shmup
+	clear && valgrind --leak-check=full --show-leak-kinds=all --log-file=.valgrind --suppressions=ncurses.supp ./bin/ft_shmup
 
 .PHONY: all clean fclean re run valgrind

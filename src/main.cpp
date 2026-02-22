@@ -102,7 +102,6 @@ int main(void)
 			
 			if (!entity->is_dead)
 				entity->render(board->win);
-
 		}
 
 		for (auto it1 = state.entities.begin(); it1 != state.entities.end(); ++it1) 
@@ -124,6 +123,9 @@ int main(void)
 				}
 			}
 		}
+
+		state.lives = player->get_hp();
+
 		state.entities.remove_if([](Entity *entity) 
 		{
 			if (entity->is_dead)
@@ -135,7 +137,7 @@ int main(void)
 		});
 
 		box(board->win, 0, 0);
-		
+
 		wprintw(hud, "\n LIVES: %d\n SCORE: %d\n LEVEL: %d\n", state.lives, state.score, state.score / 1000 + 1);
 
 		box(hud, 0, 0);
@@ -143,6 +145,8 @@ int main(void)
 		wrefresh(board->win);
 		wrefresh(hud);
 	}
+
+	delete(board);
 
 	printw("PRESS RETURN TO EXIT...\n");
 	while (getch() != '\n') {}

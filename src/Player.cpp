@@ -38,15 +38,11 @@ void Player::update(t_gamestate &state)
 }
 
 void Player::on_collision(Entity* other, t_gamestate &state) {
-	if (other->type == TYPE_ENEMY_BULLET){
+	(void)state;
+	if (other->type == TYPE_ENEMY_BULLET)
 		this->hp--;
-		state.lives--;
-	}
-	else if (other->type == TYPE_ENEMY){
-		this->is_dead = true;
+	else if (other->type == TYPE_ENEMY)
 		this->hp = 0;
-		state.lives = 0;
-	}
 }
 
 

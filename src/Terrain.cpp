@@ -4,7 +4,7 @@ void Terrain::update(t_gamestate &state)
 {
 	this->delta_time += state.delta_time;
 
-	if (SECONDS(this->delta_time) > 0.15f){
+	if (SECONDS(this->delta_time) > 0.12f){
 		rows.pop_back();
 		rows.push_front(generate_row());
 		this->delta_time = 0;

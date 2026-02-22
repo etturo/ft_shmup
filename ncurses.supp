@@ -1,0 +1,72 @@
+{
+   ncurses_libncurses
+   Memcheck:Leak
+   ...
+   obj:*/libncurses*
+}
+{
+   ncurses_libtinfo
+   Memcheck:Leak
+   ...
+   obj:*/libtinfo*
+}
+{
+   ncurses_newwin
+   Memcheck:Leak
+   ...
+   fun:newwin*
+}
+{
+   ncurses_newterm
+   Memcheck:Leak
+   ...
+   fun:newterm*
+}
+{
+   ncurses_initscr
+   Memcheck:Leak
+   ...
+   fun:initscr
+}
+{
+   ncurses_keypad
+   Memcheck:Leak
+   ...
+   fun:_nc_keypad
+}
+{
+   ncurses_setupterm
+   Memcheck:Leak
+   ...
+   fun:_nc_setupterm
+}
+{
+   ncurses_tiparm
+   Memcheck:Leak
+   ...
+   fun:_nc_tiparm
+}
+{
+   ncurses_doupdate
+   Memcheck:Leak
+   ...
+   fun:doupdate*
+}
+{
+   ncurses_wrefresh
+   Memcheck:Leak
+   ...
+   fun:wrefresh
+}
+{
+   ncurses_start_color
+   Memcheck:Leak
+   ...
+   fun:start_color*
+}
+{
+   ncurses_printw
+   Memcheck:Leak
+   ...
+   fun:*printw*
+}
