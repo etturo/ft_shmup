@@ -5,10 +5,14 @@ void Boss::update(t_gamestate &state)
 	this->delta_time += state.delta_time;
 	this->fire_time += state.delta_time;
 
-	if (SECONDS(this->delta_time) > 1.5f){
+	if (this->hp <= 0){
+		state.score += 1000;
+		this->is_dead = true;
+	}
+	if (SECONDS(this->delta_time) > 1.0f){
 		this->pos.y += 1;
 
-		if (dir == 1 && move <= 2)
+		if (dir == 1 && move <= 3)
 		{
 			this->pos.x++;
 			move++;
@@ -17,7 +21,7 @@ void Boss::update(t_gamestate &state)
 				move = 0;
 			}
 		}
-		else if (dir == -1 && move <= 3)
+		else if (dir == -1 && move <= 4)
 		{
 			this->pos.x--;
 			move++;
@@ -30,7 +34,7 @@ void Boss::update(t_gamestate &state)
 		this->delta_time = 0;
 	}
 
-	if (SECONDS(this->fire_time) > 0.3f){
+	if (SECONDS(this->fire_time) > 0.2f){
 		Vector2 second_cannon;
 		second_cannon.x = this->pos.x + 14;
 		second_cannon.y = this->pos.y;
@@ -49,6 +53,8 @@ void Boss::render(WINDOW *win)
 }
 
 void Boss::on_collision(Entity* other, t_gamestate &state) {
+	(void)state;
+
 	if (other->type == TYPE_BULLET) {
 		this->hp--;
 	}
@@ -59,13 +65,14 @@ void Boss::on_collision(Entity* other, t_gamestate &state) {
 
 Boss::Boss()
 {
-	this->hp = 1;
+	this->hp = 100;
 	this->pos.x = (BOARD_COLS / 2) - strlen(BOSS) / 2 - 1;
 	this->pos.y = 1;
 	this->delta_time = 0;
 	this->fire_time = 0;
 	this->sprite = BOSS;
-	sprite_len = strlen(ENEMY);
+	this->sprite_len = strlen(BOSS);
+	this->sprite_height = 1;
 	this->type = TYPE_ENEMY;
 	this->dir = 1;
 	this->move = 0;

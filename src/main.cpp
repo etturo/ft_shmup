@@ -88,11 +88,11 @@ int main(void)
 		background.update(state);
 		background.render(board->win);
 
-		if ((SECONDS(state.spawn_time) > (SPAWN_RATE / ((state.score / 1000) + 1) + 1)) && state.level != 1){
+		if ((SECONDS(state.spawn_time) > (SPAWN_RATE / ((state.score / 1000) + 1) + 1)) && state.level != 3){
 			state.spawn_list.push_front(new Enemy());
 			state.spawn_time = 0;
 		}
-		if (state.level == 1 && state.boss_active == false)
+		if (state.level == 3 && state.boss_active == false)
 		{
 			state.boss_active = true;
 			state.spawn_list.push_front(new Boss());
