@@ -59,6 +59,7 @@ int main(void)
 
 	state.time = get_current_time();
 	state.spawn_time = get_current_time();
+	state.start_time = get_current_time();
 
 	while (true)
 	{
@@ -71,7 +72,6 @@ int main(void)
 			printw("GAME OVER!\n");
 			break;
 		}
-
 
 		state.pressed = wgetch(board->win);
 
@@ -88,9 +88,14 @@ int main(void)
 		background.update(state);
 		background.render(board->win);
 
-		if (SECONDS(state.spawn_time) > SPAWN_RATE / ((state.score / 1000) + 1)){
+		if ((SECONDS(state.spawn_time) > (SPAWN_RATE / ((state.score / 1000) + 1) + 1)) && state.level != 1){
 			state.spawn_list.push_front(new Enemy());
 			state.spawn_time = 0;
+		}
+		if (state.level == 1 && state.boss_active == false)
+		{
+			state.boss_active = true;
+			state.spawn_list.push_front(new Boss());
 		}
 
 		state.entities.splice(state.entities.begin(), state.spawn_list);
@@ -99,7 +104,7 @@ int main(void)
 		for (Entity *entity : state.entities)
 		{
 			entity->update(state);
-			
+
 			if (!entity->is_dead)
 				entity->render(board->win);
 		}
@@ -138,7 +143,9 @@ int main(void)
 
 		box(board->win, 0, 0);
 
-		wprintw(hud, "\n LIVES: %d\n SCORE: %d\n LEVEL: %d\n", state.lives, state.score, state.score / 1000 + 1);
+		long long elapsed = static_cast<long long>((state.time - state.start_time) / 1000000000LL);
+		state.level = state.score / 1000 + 1;
+		wprintw(hud, "\n LIVES: %d\n SCORE: %d\n LEVEL: %d\n TIME: %02lld:%02lld", state.lives, state.score, state.level, elapsed / 60, elapsed % 60);
 
 		box(hud, 0, 0);
 

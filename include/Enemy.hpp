@@ -8,7 +8,7 @@ int random_between(int min, int max);
 
 class Enemy : public Entity
 {
-private:
+protected:
 	int hp;
 	long long fire_time;
 	const char *sprite;

@@ -30,7 +30,7 @@ void Enemy::update(t_gamestate &state) {
 		this->delta_time = 0;
 	}
 
-	if (SECONDS(this->fire_time) > 1.0f){
+	if (SECONDS(this->fire_time) > 1.5f){
 		state.spawn_list.push_back(new EnemyBullet(this->pos));
 		this->fire_time = 0;
 	}
@@ -50,6 +50,7 @@ void Enemy::on_collision(Entity* other, t_gamestate &state) {
 		this->is_dead = true;
 	}
 }
+
 void Enemy::render(WINDOW *win) {
 	mvwprintw(win, this->pos.y, this->pos.x, "%s", this->sprite);
 }

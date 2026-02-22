@@ -13,6 +13,7 @@
 # include "GameState.hpp"
 # include "settings.hpp"
 # include "Terrain.hpp"
+# include "Boss.hpp"
 
 t_gamestate	init_state();
 

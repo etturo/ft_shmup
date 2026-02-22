@@ -21,6 +21,7 @@
 # define ENEMY ("<\\v/>")
 # define ENEMY_2 ("{0+0}")
 # define ENEMY_BULLET ("o")
+# define BOSS ("({*})~~(0^0)~~({*})")
 
 # define MAX_HEIGHT (BOARD_DIM - (BOARD_DIM / 4)) 
 # define SECONDS(clock) (clock / 1000000000.0f)
