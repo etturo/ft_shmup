@@ -3,6 +3,8 @@
 
 # include "Entity.hpp"
 
+int random_between(int min, int max);
+
 class Enemy : public Entity
 {
 private:
@@ -11,6 +13,7 @@ private:
 public:
 	void update(t_gamestate &state) override;
 	void render(WINDOW *win) override;
+
 
 	inline int get_hp(){return this->hp;};
 	inline Vector2 get_pos(){return this->pos;};

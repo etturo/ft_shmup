@@ -1,10 +1,9 @@
 #include "../include/main.hpp"
 #include <unistd.h>
+#include <locale.h>
 
 long long int get_current_time() {
-	return std::chrono::duration_cast<std::chrono::milliseconds>(
-		std::chrono::steady_clock::now().time_since_epoch()
-	).count();
+	return std::chrono::steady_clock::now().time_since_epoch().count();
 }
 
 t_gamestate	init_state()
@@ -32,6 +31,7 @@ int check_size()
 
 int main(void)
 {
+	setlocale(LC_ALL, "");
 	initscr();
 	cbreak();
 	noecho();
@@ -46,17 +46,13 @@ int main(void)
 	nodelay(board->win, TRUE);
 	
 	t_gamestate	state = init_state();
-	Player *player = new Player();
-	state.entities.push_front(player);
+	state.entities.push_front(new Player());
 
 	state.time = get_current_time();
 
 	while (true)
 	{
-
 		state.pressed = wgetch(board->win);
-
-		flushinp();
 
 		if (state.pressed == 'q')
 			break;
@@ -65,7 +61,12 @@ int main(void)
 		state.time = get_current_time();
 
 		werase(board->win);
-		box(board->win, 0, 0);
+
+		if (SECONDS(state.delta_time) > 1.0f)
+			state.spawn_list.push_front(new Enemy());
+
+		state.entities.splice(state.entities.begin(), state.spawn_list);
+		state.spawn_list.clear();
 
 		for (Entity *entity : state.entities)
 		{
@@ -74,6 +75,8 @@ int main(void)
 			if (!entity->is_dead)
 				entity->render(board->win);
 		}
+
+		box(board->win, 0, 0);
 
 		state.entities.remove_if([](Entity *entity) 
 		{

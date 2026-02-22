@@ -13,6 +13,7 @@ typedef struct s_gamestate {
 	int					pressed;
 	long long			delta_time;
 	std::list<Entity*>	entities;
+	std::list<Entity*>	spawn_list;
 }				t_gamestate;
 
 #endif

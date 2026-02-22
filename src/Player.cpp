@@ -21,10 +21,8 @@ void Player::update(t_gamestate &state)
 		case 260: new_x -= 1 ; break;
 	}
 	
-	if (state.pressed == 32){
-		Bullet *bullet = new Bullet(this->pos);
-		state.entities.push_back(bullet);
-	}
+	if (state.pressed == 32)
+		state.spawn_list.push_back(new Bullet(this->pos));
 
 	if (new_x > 0 && new_x < (BOARD_COLS - (int)strlen(SPACESHIP) / 2 + ((int)strlen(SPACESHIP) % 2 == 0 ? -2 : -3)))
 		this->pos.x = new_x;

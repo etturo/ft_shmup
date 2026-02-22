@@ -5,7 +5,7 @@ void Bullet::update(t_gamestate &state)
 {
 	this->delta_time += state.delta_time;
 
-	if (this->delta_time >= 50){
+	if (SECONDS(this->delta_time) > 0.05f){
 		this->pos.y--;
 		this->delta_time = 0;
 	}

@@ -2,11 +2,15 @@
 
 Enemy::Enemy() {
 	this->hp = 1;
-	this->pos.x = 0;
-	this->pos.y = 0;
+	this->pos.x = random_between(strlen(ENEMY), BOARD_COLS - strlen(ENEMY));
+	this->pos.y = 1;
 }
 
 Enemy::~Enemy() {
+}
+
+int random_between(int min, int max){
+	return (min + (((rand() % 100) / 100) + max - min));
 }
 
 void Enemy::update(t_gamestate &state) {
@@ -17,5 +21,5 @@ void Enemy::update(t_gamestate &state) {
 }
 
 void Enemy::render(WINDOW *win) {
-	mvwaddch(win, this->pos.y, this->pos.x, 'X');
+	mvwprintw(win, this->pos.y, this->pos.x, ENEMY);
 }
