@@ -7,6 +7,9 @@
 #include <string.h>
 #include <string>
 #include <deque>
+#include <list>
+#include <unistd.h>
+#include <locale.h>
 
 # include "GameState.hpp"
 

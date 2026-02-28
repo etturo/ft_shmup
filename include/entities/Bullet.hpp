@@ -2,7 +2,7 @@
 # define BULLET_H
 
 #include "Entity.hpp"
-#include "settings.hpp"
+#include "Settings.hpp"
 
 class Bullet : public Entity
 {

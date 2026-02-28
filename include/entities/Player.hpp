@@ -2,10 +2,8 @@
 #define PLAYER_HPP
 
 #include "Entity.hpp"
-#include "settings.hpp"
+#include "Settings.hpp"
 #include "Bullet.hpp"
-#include <ncurses.h>
-#include "string.h"
 
 class Player : public Entity
 {

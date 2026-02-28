@@ -1,15 +1,15 @@
 NAME = ft_shmup
 
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -I include
+CXXFLAGS = -Wall -Wextra -Werror -I include -I include/core -I include/entities -I include/world
 LDFLAGS = -lncurses
 
-SRC_DIR = src
+SRC_DIRS = src/core src/entities src/world
 OBJ_DIR = obj
 BIN_DIR = bin
 
-SRCS = $(wildcard $(SRC_DIR)/*.cpp)
-OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
+SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.cpp))
+OBJS = $(patsubst src/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 
 all: $(BIN_DIR)/$(NAME)
 
@@ -17,8 +17,16 @@ $(BIN_DIR)/$(NAME): $(OBJS)
 	@mkdir -p $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)/core/%.o: src/core/%.cpp
+	@mkdir -p $(OBJ_DIR)/core
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/entities/%.o: src/entities/%.cpp
+	@mkdir -p $(OBJ_DIR)/entities
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/world/%.o: src/world/%.cpp
+	@mkdir -p $(OBJ_DIR)/world
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:

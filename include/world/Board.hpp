@@ -3,7 +3,7 @@
 
 # include <ncurses.h>
 # include <chrono>
-# include "settings.hpp"
+# include "Settings.hpp"
 
 class Board
 {

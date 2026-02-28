@@ -1,7 +1,7 @@
 #ifndef TERRAIN_HPP
 # define TERRAIN_HPP
 
-#include "settings.hpp"
+#include "Settings.hpp"
 #include "Updatable.hpp"
 
 class Terrain : public Updatable

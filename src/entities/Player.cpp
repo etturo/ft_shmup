@@ -1,4 +1,4 @@
-#include "../include/Player.hpp"
+#include "../include/entities/Player.hpp"
 
 Player::Player() {
 	this->hp = 3;

@@ -1,10 +1,4 @@
-#include "../include/main.hpp"
-#include <unistd.h>
-#include <locale.h>
-
-long long int get_current_time() {
-	return std::chrono::steady_clock::now().time_since_epoch().count();
-}
+#include "../include/core/main.hpp"
 
 t_gamestate	init_state()
 {

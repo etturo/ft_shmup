@@ -1,4 +1,4 @@
-#include "../include/Board.hpp"
+#include "../include/world/Board.hpp"
 
 Board::Board()
 {
