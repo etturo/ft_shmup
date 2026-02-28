@@ -16,7 +16,7 @@
 
 #define SPAWN_RATE 5
 
-# define SPACESHIP ("=<O>=")
+# define SPACESHIP ("-<O>-")
 # define BULLET ("|")
 # define ENEMY ("<\\v/>")
 # define ENEMY_2 ("{0+0}")

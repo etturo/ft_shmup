@@ -63,7 +63,9 @@ int main(void)
 
 	while (true)
 	{
-		if (player->is_dead)
+		state.pressed = wgetch(board->win);
+
+		if (player->is_dead || state.pressed == 'q')
 		{
 			for (Entity *entity : state.entities)
 				delete(entity);
@@ -72,11 +74,6 @@ int main(void)
 			printw("GAME OVER!\n");
 			break;
 		}
-
-		state.pressed = wgetch(board->win);
-
-		if (state.pressed == 'q')
-			break;
 
 		state.delta_time = get_current_time() - state.time;
 		state.time = get_current_time();
@@ -88,7 +85,7 @@ int main(void)
 		background.update(state);
 		background.render(board->win);
 
-		if ((SECONDS(state.spawn_time) > (SPAWN_RATE / ((state.score / 1000) + 1) + 1)) && state.level != 3){
+		if ((SECONDS(state.spawn_time) > ((SPAWN_RATE / ((state.score / 1000) + 1)) + 1)) && state.level != 3){
 			state.spawn_list.push_front(new Enemy());
 			state.spawn_time = 0;
 		}
