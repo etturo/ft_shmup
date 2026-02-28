@@ -58,29 +58,51 @@ make valgrind
 ```
 ft_shmup/
 ├── include/
-│   ├── Board.hpp        # Game board / window management
-│   ├── Boss.hpp         # Boss enemy class
-│   ├── Bullet.hpp       # Player and enemy bullet classes
-│   ├── Enemy.hpp        # Enemy class
-│   ├── Entity.hpp       # Base entity class with position & collision
-│   ├── GameState.hpp    # Game state struct (score, lives, entities...)
-│   ├── Player.hpp       # Player class
-│   ├── settings.hpp     # Game constants and sprite definitions
-│   ├── Terrain.hpp      # Scrolling background
-│   └── Updatable.hpp    # Abstract updatable interface
+│   ├── core/
+│   │   ├── GameMode.hpp      # Game mode enum (menu, playing, paused, game over)
+│   │   ├── GameState.hpp     # Game state struct (score, lives, entities, etc.)
+│   │   ├── main.hpp          # Main function declarations
+│   │   ├── Settings.hpp      # Game constants and configuration
+│   │   └── Utils.hpp         # Utility functions (timing, etc.)
+│   ├── entities/
+│   │   ├── Boss.hpp          # Boss enemy class
+│   │   ├── Bullet.hpp        # Player and enemy bullet classes
+│   │   ├── Enemy.hpp         # Enemy class
+│   │   ├── Entity.hpp        # Base entity class with position & collision
+│   │   ├── Player.hpp        # Player class
+│   │   └── Updatable.hpp     # Abstract updatable interface for entities
+│   ├── world/
+│   │   ├── Board.hpp         # Game board / window management
+│   │   ├── Terrain.hpp       # Scrolling background
+│   │   └── Hud.hpp           # Heads-up display (HUD)
 ├── src/
-│   ├── Board.cpp
-│   ├── Boss.cpp
-│   ├── Bullet.cpp
-│   ├── Enemy.cpp
-│   ├── Entity.cpp
-│   ├── main.cpp
-│   ├── Player.cpp
-│   ├── Terrain.cpp
-│   └── Updatable.cpp
-├── Makefile
-└── README.md
+│   ├── core/
+│   │   ├── main.cpp          # Main game loop and logic
+│   │   └── Utils.cpp         # Utility function implementations
+│   ├── entities/
+│   │   ├── Boss.cpp          # Boss enemy logic
+│   │   ├── Bullet.cpp        # Bullet logic
+│   │   ├── Enemy.cpp         # Enemy logic
+│   │   ├── Entity.cpp        # Base entity logic
+│   │   ├── Player.cpp        # Player logic
+│   │   └── Updatable.cpp     # Updatable interface implementation
+│   ├── world/
+│   │   ├── Board.cpp         # Board rendering and input
+│   │   ├── Terrain.cpp       # Terrain rendering and update
+│   │   └── Hud.cpp           # HUD rendering and update
+├── bin/                      # Compiled binary output
+├── obj/                      # Compiled object files
+├── Makefile                  # Build system
+├── ncurses.supp              # Valgrind suppression file for ncurses
+├── supp_extra.supp           # Additional Valgrind suppressions
+└── README.md                 # Project documentation
 ```
+
+### Additional Notes
+- The game uses a double-linked list for entity management, allowing efficient insertion and removal of entities during gameplay.
+- Collision detection is performed between all entities, including player, enemies, bullets, and boss.
+- The HUD displays lives, score, level, and elapsed time, updating in real time.
+- The Makefile supports building, cleaning, running, and memory checking with Valgrind, and is adapted for the multi-folder structure.
 
 ## Sprites
 
