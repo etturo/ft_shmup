@@ -1,9 +1,10 @@
 #ifndef PLAYER_HPP
-#define PLAYER_HPP
+# define PLAYER_HPP
 
-#include "Entity.hpp"
-#include "Settings.hpp"
-#include "Bullet.hpp"
+# include "Entity.hpp"
+# include "Settings.hpp"
+# include "Bullet.hpp"
+# include "GameState.hpp"
 
 class Player : public Entity
 {

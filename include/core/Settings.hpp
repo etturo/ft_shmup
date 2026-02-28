@@ -11,13 +11,15 @@
 #include <unistd.h>
 #include <locale.h>
 
-# include "GameState.hpp"
-
 # define BOARD_DIM 40
 # define BOARD_ROWS BOARD_DIM
 # define BOARD_COLS BOARD_DIM
 
-#define SPAWN_RATE 5
+# define PLAYER_LIVES 100
+# define SCORE_TO_LEVEL_UP 1000
+
+# define HUD_ROWS 7
+# define HUD_COLS 15
 
 # define SPACESHIP ("-<O>-")
 # define BULLET ("|")
@@ -28,5 +30,6 @@
 
 # define MAX_HEIGHT (BOARD_DIM - (BOARD_DIM / 4)) 
 # define SECONDS(clock) (clock / 1000000000.0f)
+# define GET_SPAWN_TIME(level) ((10 / level) - (6 / level) + 0.3f)
 
 #endif

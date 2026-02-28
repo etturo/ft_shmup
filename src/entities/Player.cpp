@@ -1,7 +1,7 @@
 #include "../include/entities/Player.hpp"
 
 Player::Player() {
-	this->hp = 3;
+	this->hp = PLAYER_LIVES;
 	this->pos.x = BOARD_COLS / 2 - strlen(SPACESHIP) / 2 + (strlen(SPACESHIP) % 2 == 0 ? 0 : -1);
 	this->pos.y = BOARD_ROWS - 5;
 	this->sprite_len = strlen(SPACESHIP);

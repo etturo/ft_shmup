@@ -2,6 +2,7 @@
 #define GAMESTATE_HPP
 
 #include <list>
+# include "GameMode.hpp"
 
 class Entity;
 
@@ -15,6 +16,7 @@ typedef struct s_gamestate {
 	long long			delta_time = 0;
 	long long			spawn_time = 0;
 	bool				boss_active;
+	GameMode			mode;
 	std::list<Entity*>	entities;
 	std::list<Entity*>	spawn_list;
 }				t_gamestate;

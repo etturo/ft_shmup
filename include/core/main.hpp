@@ -11,6 +11,9 @@
 # include "Terrain.hpp"
 # include "Boss.hpp"
 # include "Utils.hpp"
+# include "Init.hpp"
+# include "Hud.hpp"
+# include "GameMode.hpp"
 
 t_gamestate	init_state();
 int main(void);

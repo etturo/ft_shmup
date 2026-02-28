@@ -1,8 +1,8 @@
 #ifndef BULLET_H
 # define BULLET_H
 
-#include "Entity.hpp"
-#include "Settings.hpp"
+# include "Entity.hpp"
+# include "Settings.hpp"
 
 class Bullet : public Entity
 {

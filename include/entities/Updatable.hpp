@@ -1,7 +1,8 @@
 #ifndef UPDATABLE_HPP
-#define UPDATABLE_HPP
+# define UPDATABLE_HPP
 
 # include "Settings.hpp"
+# include "GameState.hpp"
 
 class Updatable
 {

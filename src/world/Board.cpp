@@ -1,9 +1,8 @@
 #include "../include/world/Board.hpp"
 
-Board::Board()
+Board::Board(int height, int length)
 {
-	this->win = newwin(BOARD_ROWS, BOARD_COLS, (LINES / 2) - (BOARD_ROWS / 2), (COLS / 2) - (BOARD_COLS / 2));
-	//wrefresh(this->win);
+	this->win = newwin(height, length, (LINES / 2) - (height / 2), (COLS / 2) - (length / 2));
 };
 
 Board::~Board() {

@@ -2,6 +2,8 @@
 #define BOSS_HPP
 
 #include "Enemy.hpp"
+# include "GameState.hpp"
+# include "GameMode.hpp"
 
 class Boss : public Enemy
 {

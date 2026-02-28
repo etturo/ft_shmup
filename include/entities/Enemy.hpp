@@ -3,6 +3,8 @@
 
 # include "Bullet.hpp"
 # include "Entity.hpp"
+# include "GameState.hpp"
+# include "GameMode.hpp"
 
 int random_between(int min, int max);
 

@@ -2,7 +2,7 @@
 # define ENTITY_HPP
 
 # include "Updatable.hpp"
-# include <ncurses.h>
+# include "GameState.hpp"
 
 struct Vector2
 {
