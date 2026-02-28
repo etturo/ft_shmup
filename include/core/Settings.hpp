@@ -15,7 +15,7 @@
 # define BOARD_ROWS BOARD_DIM
 # define BOARD_COLS BOARD_DIM
 
-# define PLAYER_LIVES 100
+# define PLAYER_LIVES 3
 # define SCORE_TO_LEVEL_UP 1000
 
 # define HUD_ROWS 7
@@ -30,6 +30,6 @@
 
 # define MAX_HEIGHT (BOARD_DIM - (BOARD_DIM / 4)) 
 # define SECONDS(clock) (clock / 1000000000.0f)
-# define GET_SPAWN_TIME(level) ((10 / level) - (6 / level) + 0.3f)
+# define GET_SPAWN_TIME(level) ((4 / level) + 0.3f)
 
 #endif
