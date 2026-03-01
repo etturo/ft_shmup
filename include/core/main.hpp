@@ -14,6 +14,7 @@
 # include "Init.hpp"
 # include "Hud.hpp"
 # include "GameMode.hpp"
+# include "Menu.hpp"
 
 t_gamestate	init_state();
 int main(void);

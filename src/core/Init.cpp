@@ -8,7 +8,12 @@ t_gamestate	init_state()
 	state.lives = PLAYER_LIVES;
 	state.score = 0;
 	state.boss_active = false;
-	state.mode = GameMode::PLAYING;
+	state.mode = GameMode::MAIN_MENU;
+	state.time = 0;
+	state.delta_time = 0;
+	state.spawn_time = 0;
+	state.start_time = 0;
+	state.render_time = 0;
 	return state;
 }
 

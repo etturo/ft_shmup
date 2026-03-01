@@ -7,6 +7,7 @@ int main(void)
 
 	Board *board = new Board(BOARD_ROWS, BOARD_COLS);
 	Hud *hud = new Hud(HUD_ROWS, HUD_COLS);
+	Menu *menu = new Menu(MENU_ROWS, MENU_COLS);
 
 	Terrain background(BOARD_COLS, BOARD_ROWS);
 
@@ -24,19 +25,57 @@ int main(void)
 
 	bool is_running = true;
 
-	while (is_running)
+	while (is_running && state.pressed != 'q')
 	{
+		// Taking the key input
+		state.pressed = wgetch(board->win);
+
+		// Calculating the current delta time
+		state.delta_time = get_current_time() - state.time;
+		state.time = get_current_time();
+
+		//Updating independently of the state of the game the background
+		background.update(state);
+
+		state.render_time += state.delta_time;
+
 		switch (state.mode)
 		{
+			/*===============================================================*/
 			case GameMode::MAIN_MENU:
 			{
+				if (state.pressed == '\n')
+				{
+					state.mode = GameMode::PLAYING;\
+					break;
+				}
+
+				if (state.render_time >= TARGET_FRAME_TIME)
+				{
+					werase(board->win);
+					werase(menu->menu);
+
+					// Render the background only based on target frame rate
+					background.render(board->win);
+
+					box(board->win, 0, 0);
+
+					wprintw(menu->menu, "\n\n");
+					wprintw(menu->menu, GAME_TITLE);
+					wprintw(menu->menu, "\n  ===================================\n");
+					wprintw(menu->menu, "\n   PRESS ENTER TO START A NEW GAME");
+					box(menu->menu, 0, 0);
+
+					wrefresh(board->win);
+					wrefresh(menu->menu);
+
+					state.render_time -= TARGET_FRAME_TIME;
+				}
 				break;
 			}
+			/*===============================================================*/
 			case GameMode::PLAYING:
 			{
-				// Taking the key input
-				state.pressed = wgetch(board->win);
-
 				// Checking if the player isn't dead or the player press 'q' to quit
 				if (player->is_dead || state.pressed == 'q')
 				{
@@ -44,24 +83,12 @@ int main(void)
 						delete(entity);
 					for (Entity *entity : state.spawn_list)
 						delete(entity);
-					printw("GAME OVER!\n");
 					state.mode = GameMode::GAME_OVER;
 					break;
 				}
 
-				// Calculating the current delta time
-				state.delta_time = get_current_time() - state.time;
-				state.time = get_current_time();
+				// Setting up the spawn time
 				state.spawn_time += state.delta_time;
-
-				// Cleaning the screen, ready to render the new state
-				werase(board->win);
-				werase(hud->hud);
-
-				// Calling the update of the background
-				background.update(state);
-				// Calling the render of the background
-				background.render(board->win);
 
 				// Checking the delta time and choosing if spawn an Enemy or not
 				if ((SECONDS(state.spawn_time) > GET_SPAWN_TIME(state.level)) \
@@ -80,14 +107,9 @@ int main(void)
 				state.entities.splice(state.entities.begin(), state.spawn_list);
 				state.spawn_list.clear();
 
-				// Loop to update the state of every enetity
+				// Loop to update every enetity
 				for (Entity *entity : state.entities)
-				{
 					entity->update(state);
-
-					if (!entity->is_dead)
-						entity->render(board->win);
-				}
 
 				// Double iterator to check collision
 				for (auto it1 = state.entities.begin(); it1 != state.entities.end(); ++it1) 
@@ -124,6 +146,29 @@ int main(void)
 					return false;
 				});
 
+				// RENDER all the stuff within the right frametime
+				if (state.render_time >= TARGET_FRAME_TIME)
+				{
+					// Cleaning the screen, ready to render the new state
+					werase(board->win);
+					werase(hud->hud);
+
+					// Upadating the background every frame so is continuous to the other game states
+					background.update(state);
+					// Calling the render of the background
+					background.render(board->win);
+
+					// Rendering every entity if is not dead
+					for (Entity *entity : state.entities)
+						if (!entity->is_dead)
+							entity->render(board->win);
+
+					wrefresh(board->win);
+					wrefresh(hud->hud);
+
+					state.render_time -= TARGET_FRAME_TIME;
+				}
+
 				// Drawing the box containing the game
 				box(board->win, 0, 0);
 
@@ -133,17 +178,17 @@ int main(void)
 
 				box(hud->hud, 0, 0);
 
-				wrefresh(board->win);
-				wrefresh(hud->hud);
-
 				break;
 			}
+			/*===============================================================*/
 			case GameMode::PAUSED:
 			{
 				break;
 			}
+			/*===============================================================*/
 			case GameMode::GAME_OVER:
 			{
+				printw("GAME OVER!\n");
 				break;
 			}
 		}
@@ -151,8 +196,9 @@ int main(void)
 
 	delete(board);
 	delete(hud);
+	delete(menu);
 
-	printw("PRESS RETURN TO EXIT...\n");
+	printw("\nPRESS ENTER TO EXIT...\n");
 	while (getch() != '\n') {}
 	endwin();
 	return (0);

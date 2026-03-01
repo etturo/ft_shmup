@@ -1,7 +1,7 @@
 #ifndef HUD_HPP
 # define HUD_HPP
 
-#include "../core/Settings.hpp"
+#include "Settings.hpp"
 
 class Hud
 {

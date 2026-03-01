@@ -15,6 +15,7 @@ typedef struct s_gamestate {
 	int					pressed;
 	long long			delta_time = 0;
 	long long			spawn_time = 0;
+	long long			render_time = 0;
 	bool				boss_active;
 	GameMode			mode;
 	std::list<Entity*>	entities;
