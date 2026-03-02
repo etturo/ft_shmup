@@ -11,14 +11,14 @@
 #include <unistd.h>
 #include <locale.h>
 
-# define BOARD_ROWS 40
-# define BOARD_COLS 50
+# define BOARD_ROWS (7 * LINES / 8)
+# define BOARD_COLS COLS / 2.5
 
 # define HUD_ROWS 7
 # define HUD_COLS 15
 
-#define MENU_ROWS BOARD_ROWS / 2.5
-#define MENU_COLS BOARD_ROWS
+#define MENU_ROWS 18
+#define MENU_COLS 39
 
 # define PLAYER_LIVES 3
 # define SCORE_TO_LEVEL_UP 1000

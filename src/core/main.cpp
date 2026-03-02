@@ -30,6 +30,9 @@ int main(void)
 		// Taking the key input
 		state.pressed = wgetch(board->win);
 
+		if (state.pressed == KEY_RESIZE)
+			resize_handling(state, board, menu, hud);
+
 		// Calculating the current delta time
 		state.delta_time = get_current_time() - state.time;
 		state.time = get_current_time();
@@ -66,8 +69,12 @@ int main(void)
 					wprintw(menu->menu, "\n   PRESS ENTER TO START A NEW GAME");
 					box(menu->menu, 0, 0);
 
-					wrefresh(board->win);
-					wrefresh(menu->menu);
+					// wrefresh(board->win);
+					// wrefresh(menu->menu);
+
+					wnoutrefresh(board->win);
+					wnoutrefresh(menu->menu);
+					doupdate();
 
 					state.render_time -= TARGET_FRAME_TIME;
 				}

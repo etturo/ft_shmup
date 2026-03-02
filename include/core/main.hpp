@@ -17,6 +17,9 @@
 # include "Menu.hpp"
 
 t_gamestate	init_state();
+
+void resize_handling(t_gamestate state, Board *board, Menu *menu, Hud *hud);
+
 int main(void);
 
 #endif

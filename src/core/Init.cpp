@@ -17,19 +17,6 @@ t_gamestate	init_state()
 	return state;
 }
 
-bool check_size()
-{
-	int yMax, xMax;
-	getmaxyx(stdscr, yMax, xMax);
-
-	if (yMax < BOARD_ROWS || xMax < BOARD_COLS) {
-		endwin();
-		printf("Error: Terminal is too small!\n");
-		return false;
-	}
-	return true;
-}
-
 bool init_ncurses()
 {
 	setlocale(LC_ALL, "");
@@ -42,9 +29,6 @@ bool init_ncurses()
 	use_default_colors();
 
 	init_pair(1, COLOR_WHITE, -1);
-
-	if (check_size() == false)
-		return false;
 
 	return true;
 }
