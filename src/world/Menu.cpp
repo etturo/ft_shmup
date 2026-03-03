@@ -1,9 +1,8 @@
-#include "../../include/world/Menu.hpp"
 #include "Menu.hpp"
 
 Menu::Menu(int height, int length)
 {
-	this->menu = newwin(height, length, (LINES / 2) - (BOARD_ROWS / 4), (COLS / 2) - (BOARD_COLS / 2.5));
+	this->menu = newwin(height, length, (LINES / 2) - (height / 2), (COLS / 2) - (length / 2));
 }
 
 Menu::~Menu()

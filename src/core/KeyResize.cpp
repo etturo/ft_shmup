@@ -1,4 +1,4 @@
-#include "../../include/core/main.hpp"
+#include "main.hpp"
 
 void resize_handling(t_gamestate state, Board *board, Menu *menu, Hud *hud)
 {

@@ -1,4 +1,4 @@
-#include "../include/core/main.hpp"
+#include "main.hpp"
 
 int main(void)
 {
@@ -30,8 +30,8 @@ int main(void)
 		// Taking the key input
 		state.pressed = wgetch(board->win);
 
-		if (state.pressed == KEY_RESIZE)
-			resize_handling(state, board, menu, hud);
+		// if (state.pressed == KEY_RESIZE)
+		// 	resize_handling(state, board, menu, hud);
 
 		// Calculating the current delta time
 		state.delta_time = get_current_time() - state.time;
@@ -47,34 +47,29 @@ int main(void)
 			/*===============================================================*/
 			case GameMode::MAIN_MENU:
 			{
-				if (state.pressed == '\n')
-				{
-					state.mode = GameMode::PLAYING;\
-					break;
-				}
+				// if (state.pressed == '\n')
+				// {
+				// 	state.mode = GameMode::PLAYING;
+				// 	break;
+				// }
 
 				if (state.render_time >= TARGET_FRAME_TIME)
 				{
+					// werase(menu->menu);
 					werase(board->win);
-					werase(menu->menu);
 
 					// Render the background only based on target frame rate
 					background.render(board->win);
 
 					box(board->win, 0, 0);
 
-					wprintw(menu->menu, "\n\n");
-					wprintw(menu->menu, GAME_TITLE);
-					wprintw(menu->menu, "\n  ===================================\n");
-					wprintw(menu->menu, "\n   PRESS ENTER TO START A NEW GAME");
+					mvwprintw(menu->menu, TITLE_OFFSET, 0, GAME_TITLE);
+					mvwprintw(menu->menu, TITLE_ROWS + TITLE_OFFSET + 1, 2, "===============================");
+					mvwprintw(menu->menu, TITLE_ROWS + TITLE_OFFSET + 3, 2, "PRESS ENTER TO START A NEW GAME");
 					box(menu->menu, 0, 0);
 
-					// wrefresh(board->win);
-					// wrefresh(menu->menu);
-
-					wnoutrefresh(board->win);
-					wnoutrefresh(menu->menu);
-					doupdate();
+					wrefresh(board->win);
+					wrefresh(menu->menu);
 
 					state.render_time -= TARGET_FRAME_TIME;
 				}
@@ -174,16 +169,16 @@ int main(void)
 					wrefresh(hud->hud);
 
 					state.render_time -= TARGET_FRAME_TIME;
+
+					// Drawing the box containing the game
+					box(board->win, 0, 0);
 				}
 
-				// Drawing the box containing the game
-				box(board->win, 0, 0);
+				// long long elapsed = static_cast<long long>((state.time - state.start_time) / 1000000000LL);
+				// state.level = state.score / 1000 + 1;
+				// wprintw(hud->hud, "\n LIVES: %d\n SCORE: %d\n LEVEL: %d\n TIME: %02lld:%02lld", state.lives, state.score, state.level, elapsed / 60, elapsed % 60);
 
-				long long elapsed = static_cast<long long>((state.time - state.start_time) / 1000000000LL);
-				state.level = state.score / 1000 + 1;
-				wprintw(hud->hud, "\n LIVES: %d\n SCORE: %d\n LEVEL: %d\n TIME: %02lld:%02lld", state.lives, state.score, state.level, elapsed / 60, elapsed % 60);
-
-				box(hud->hud, 0, 0);
+				// box(hud->hud, 0, 0);
 
 				break;
 			}

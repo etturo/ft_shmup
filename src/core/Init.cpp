@@ -1,4 +1,4 @@
-#include "../include/core/Init.hpp"
+#include "Init.hpp"
 
 t_gamestate	init_state()
 {

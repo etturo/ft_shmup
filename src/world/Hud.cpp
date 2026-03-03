@@ -1,4 +1,4 @@
-#include "../include/world/Hud.hpp"
+#include "Hud.hpp"
 
 Hud::Hud(int height, int length)
 {

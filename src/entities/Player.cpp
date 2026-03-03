@@ -1,4 +1,4 @@
-#include "../include/entities/Player.hpp"
+#include "Player.hpp"
 
 Player::Player() {
 	this->hp = PLAYER_LIVES;
