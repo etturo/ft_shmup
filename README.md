@@ -1,3 +1,15 @@
+# Give Up GitHub
+
+This project has given up GitHub. (See [Software Freedom Conservancy's Give Up GitHub site](https://giveupgithub.org/) for details.)
+
+You can now find this project at https://codeberg.org/etturo/ft_shmup instead.
+
+Any use of this project's code by GitHub Copilot, past or present, is done without our permission. We do not consent to GitHub's use of this project's code in Copilot.
+
+Join us; you can [give up GitHub](https://giveupgithub.org/) too!
+
+---
+
 # ft_shmup
 
 A terminal-based shoot 'em up game built with **C++** and **ncurses**, developed as a Rush project at 42.
@@ -108,7 +120,7 @@ ft_shmup/
 
 ```
 Player:     =<O>=
-Enemy:      <\v/>
+Enemy:      </>
 Enemy 2:    {0+0}
 Boss:       ({*})~~(0^0)~~({*})
 Bullet:     |
